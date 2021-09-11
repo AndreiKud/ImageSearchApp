@@ -22,7 +22,7 @@ android {
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
-        buildConfigField("String", "unsplash_access_key", keystoreProperties['unsplash_access_key'])
+        buildConfigField("String", "UNSPLASH_API_KEY", keystoreProperties['unsplash_access_key'])
     }
 
     buildTypes {
