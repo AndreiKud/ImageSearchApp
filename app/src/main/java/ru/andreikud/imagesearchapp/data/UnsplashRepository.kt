@@ -2,6 +2,7 @@ package ru.andreikud.imagesearchapp.data
 
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
+import androidx.paging.liveData
 import ru.andreikud.imagesearchapp.data.network.UnsplashApi
 import javax.inject.Inject
 import javax.inject.Singleton
@@ -18,6 +19,6 @@ class UnsplashRepository @Inject constructor(
             enablePlaceholders = false
         ),
         pagingSourceFactory = { UnsplashPagingSource(unsplashApi, query) }
-    ).flow
+    ).liveData
 
 }

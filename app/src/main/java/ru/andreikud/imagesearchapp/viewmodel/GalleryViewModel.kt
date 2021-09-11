@@ -18,8 +18,7 @@ class GalleryViewModel @Inject constructor(
 
     val searchQuery = MutableLiveData("")
 
-    @ExperimentalCoroutinesApi
-    val photos = searchQuery.asFlow().flatMapLatest { currentQuery ->
+    val photos = searchQuery.switchMap { currentQuery ->
         unsplashRepository.getSearchResults(currentQuery).cachedIn(viewModelScope)
     }
 

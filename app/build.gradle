@@ -41,7 +41,9 @@ android {
         jvmTarget = '1.8'
     }
 
-
+    buildFeatures {
+        viewBinding true
+    }
 }
 
 dependencies {
@@ -58,6 +60,7 @@ dependencies {
 
     // Paging
     implementation 'androidx.paging:paging-common-ktx:3.0.1'
+    implementation 'androidx.paging:paging-runtime-ktx:3.0.1'
 
     // Dagger Hilt
     implementation "androidx.hilt:hilt-lifecycle-viewmodel:1.0.0-alpha03"
