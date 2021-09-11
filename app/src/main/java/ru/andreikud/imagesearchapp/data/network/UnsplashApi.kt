@@ -1,10 +1,10 @@
-package ru.andreikud.imagesearchapp.network
+package ru.andreikud.imagesearchapp.data.network
 
 import retrofit2.http.GET
 import retrofit2.http.Headers
 import retrofit2.http.Query
 import ru.andreikud.imagesearchapp.BuildConfig
-import ru.andreikud.imagesearchapp.network.models.UnsplashResponse
+import ru.andreikud.imagesearchapp.data.network.models.UnsplashResponse
 
 interface UnsplashApi {
 

@@ -1,4 +1,4 @@
-package ru.andreikud.imagesearchapp.network.models
+package ru.andreikud.imagesearchapp.data.network.models
 
 import ru.andreikud.imagesearchapp.data.models.UnsplashObject
 
