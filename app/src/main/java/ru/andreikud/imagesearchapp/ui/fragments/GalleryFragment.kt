@@ -4,12 +4,11 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.lifecycleScope
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.collect
 import ru.andreikud.imagesearchapp.R
 import ru.andreikud.imagesearchapp.databinding.FragmentGalleryBinding
 import ru.andreikud.imagesearchapp.ui.adapter.GalleryAdapter
+import ru.andreikud.imagesearchapp.ui.adapter.GalleryLoadStateAdapter
 import ru.andreikud.imagesearchapp.viewmodel.GalleryViewModel
 
 @AndroidEntryPoint
@@ -24,8 +23,11 @@ class GalleryFragment : Fragment(R.layout.fragment_gallery) {
 
         val adapter = GalleryAdapter()
         binding?.apply {
-            rvPhotos.adapter = adapter
             rvPhotos.setHasFixedSize(true)
+            rvPhotos.adapter = adapter.withLoadStateHeaderAndFooter(
+                footer = GalleryLoadStateAdapter { adapter.retry() },
+                header = GalleryLoadStateAdapter { adapter.retry() }
+            )
         }
 
         viewModel.photos.observe(viewLifecycleOwner) { data ->
