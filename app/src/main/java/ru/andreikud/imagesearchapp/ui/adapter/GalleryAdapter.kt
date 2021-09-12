@@ -11,8 +11,14 @@ import ru.andreikud.imagesearchapp.R
 import ru.andreikud.imagesearchapp.data.models.UnsplashObject
 import ru.andreikud.imagesearchapp.databinding.UnsplashItemBinding
 
-class GalleryAdapter :
+class GalleryAdapter(
+    private val listener: OnItemClickListener
+) :
     PagingDataAdapter<UnsplashObject, GalleryAdapter.UnsplashViewHolder>(UNSPLASH_OBJECT_COMPARATOR) {
+
+    interface OnItemClickListener {
+        fun onItemClick(photoObject: UnsplashObject)
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UnsplashViewHolder {
         val inflater = LayoutInflater.from(parent.context)
@@ -25,10 +31,20 @@ class GalleryAdapter :
         unsplashObject?.let(holder::bind)
     }
 
-    class UnsplashViewHolder(private val binding: UnsplashItemBinding) :
+    inner class UnsplashViewHolder(private val binding: UnsplashItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
         private val ivPhoto = binding.ivPhoto
         private val tvUsername = binding.tvUsername
+
+        init {
+            binding.root.setOnClickListener {
+                val position = bindingAdapterPosition
+                if (position != RecyclerView.NO_POSITION) {
+                    val item = getItem(position)
+                    item?.let(listener::onItemClick)
+                }
+            }
+        }
 
         fun bind(unsplashObject: UnsplashObject) {
             Glide.with(itemView)

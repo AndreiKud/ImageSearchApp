@@ -8,5 +8,18 @@
         android:id="@+id/galleryFragment2"
         android:name="ru.andreikud.imagesearchapp.ui.fragments.GalleryFragment"
         android:label="fragment_gallery"
-        tools:layout="@layout/fragment_gallery" />
+        tools:layout="@layout/fragment_gallery" >
+        <action
+            android:id="@+id/action_galleryFragment2_to_fragmentDetails"
+            app:destination="@id/fragmentDetails" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragmentDetails"
+        android:name="ru.andreikud.imagesearchapp.ui.fragments.FragmentDetails"
+        android:label="fragment_details"
+        tools:layout="@layout/fragment_details" >
+        <argument
+            android:name="photo"
+            app:argType="ru.andreikud.imagesearchapp.data.models.UnsplashObject" />
+    </fragment>
 </navigation>

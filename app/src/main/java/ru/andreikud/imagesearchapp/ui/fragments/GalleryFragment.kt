@@ -8,20 +8,22 @@ import androidx.appcompat.widget.SearchView
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.paging.LoadState
 import dagger.hilt.android.AndroidEntryPoint
 import ru.andreikud.imagesearchapp.R
+import ru.andreikud.imagesearchapp.data.models.UnsplashObject
 import ru.andreikud.imagesearchapp.databinding.FragmentGalleryBinding
 import ru.andreikud.imagesearchapp.ui.adapter.GalleryAdapter
 import ru.andreikud.imagesearchapp.ui.adapter.GalleryLoadStateAdapter
 import ru.andreikud.imagesearchapp.viewmodel.GalleryViewModel
 
 @AndroidEntryPoint
-class GalleryFragment : Fragment(R.layout.fragment_gallery) {
+class GalleryFragment : Fragment(R.layout.fragment_gallery), GalleryAdapter.OnItemClickListener {
 
     private val viewModel: GalleryViewModel by viewModels()
     private var binding: FragmentGalleryBinding? = null
-    private val adapter = GalleryAdapter()
+    private val adapter = GalleryAdapter(this)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -30,6 +32,11 @@ class GalleryFragment : Fragment(R.layout.fragment_gallery) {
         setupRecycler()
         setupObservers()
         setHasOptionsMenu(true)
+    }
+
+    override fun onItemClick(photoObject: UnsplashObject) {
+        val action = GalleryFragmentDirections.actionGalleryFragment2ToFragmentDetails(photoObject)
+        findNavController().navigate(action)
     }
 
     private fun setupRecycler() {
