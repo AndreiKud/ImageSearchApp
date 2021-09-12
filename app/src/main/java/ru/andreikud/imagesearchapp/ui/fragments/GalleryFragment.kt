@@ -35,6 +35,7 @@ class GalleryFragment : Fragment(R.layout.fragment_gallery) {
     private fun setupRecycler() {
         binding?.apply {
             rvPhotos.setHasFixedSize(true)
+            rvPhotos.itemAnimator = null
             rvPhotos.adapter = adapter.withLoadStateHeaderAndFooter(
                 footer = GalleryLoadStateAdapter { adapter.retry() },
                 header = GalleryLoadStateAdapter { adapter.retry() }
